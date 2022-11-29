@@ -28,14 +28,21 @@ These experiments are based on my micropython experiments branch at:
   II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2)
   to measure power consumption of device during experiments.
   - Also supports visualisation of timing pulses from device pins.
-- Cables.
+- Cables, computer.
 
 ## Method and Results
 
 ### Measuring ESP32 boot times and power consumption
 
 These measurements are made with the ESP32 device powered by USB (5V) and the
-PPK2 operating in Ammeter mode to measure the current on the USB 5V line.
+PPK2 operating in ammeter mode to measure the current on the USB 5V line. This
+method does not fully reflect the power efficiency of the device when running
+off a LiPoly battery, but is convenient for reprogramming and controlling the
+device during the test. The average current draw for the FeatherS3 device while
+in deepsleep is 1.73mA (at 5V USB).
+
+See below for final power consumption measurements when the PPK2 is the power
+source (simulating a LiPo battery power source).
 
 #### Full boot to main.py
 
@@ -122,6 +129,9 @@ Total time from boot back to deepsleep: 70.4ms (3.17mC)
 I _believe_ this is not necessary on every boot and can be safely skipped when
 waking from deepsleep.
 
+**UPDATE:** `nvs_flash_init()` must be called before initialising wifi (as RF
+calibaration data is read from nvs).
+
 Time for `nvs_flash_init()` reduced from 7.8ms (0.57mC) to 0ms (0mC).
 (200microseconds is time to generate pulse on logic pin).
 
@@ -177,9 +187,8 @@ Time from boot to back to deepsleep: 50.0ms (1.87mC) (reduced from 264ms
 Compared with the ESP32-S2 module above, the ESP32 boot from, and return to
 deepsleep takes 70ms (3.32mC)
 
-NOTE: This module is not very power efficient (background current = 15.0mA), so
-charge values should not be
-compared directly.
+NOTE: This esp32 module board is not very power efficient (background current =
+15.0mA), so charge values should not be compared directly.
 
 ![](./images/ppk-2-ESP32-fast-boot-1.png)
 
@@ -209,5 +218,110 @@ Returns to deepsleep after 8.7ms (0.18mC) (4x longer than ESP32).
 Compared with fast boot from deep sleep.
 
 ![](./images/ppk-2-esp32s3-wake-stub-fast-boot.png)
+
+### Send status via ESNow from _boot.py
+(commit
+[fc62686](https://github.com/micropython/micropython/commit/fc62686524245f9f1b492eb0c978e00375e44d90))
+
+**NOTE:** This commit has `nvs_flash_init()` enabled at boot time as this is
+required for `esp_wifi_init()` (additional 7ms of bootup time).
+
+`_preboot.py`:
+```python
+import machine
+
+def send_state(broker):
+    import network
+    from _espnow import ESPNow
+
+    enow = ESPNow()
+    enow.active(True)
+    enow.add_peer(broker)
+    sta = network.WLAN(network.STA_IF)
+    sta.active(True)
+    enow.send(broker, b"wake_up", True)
+    enow.active(False)
+    sta.active(False)
+
+if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+    send_state(b"\xf4\x12\xfaA\xf7T")
+    machine.deepsleep(1000)
+```
+
+**ESP32S3**
+
+**ESP32**
+
+- Time to boot and return to deepsleep is 118.8ms (7.68mC).
+- A 1 byte message generates a current spike of ~550mA over 0.6ms.
+  - A 250 byte messages generates a transmission spike of ~2.5ms and scales
+    linearly with message length between these values.
+- **NOTE:** The ESP32 board is inefficient and has a deepsleep current of 15mA.
+
+![](./images/ppk-2-fast-boot_preboot-espnow-esp32.png)
+
+If the peer is not found, the transmission is retried and more power is
+consumed:
+
+- 144.9ms (15.43mC) (twice the power consumption)
+- Note: Retransmission does **NOT** occur if sending to the broadcast address.
+
+![](./images/ppk-2-fast-boot_preboot-espnow-esp32-not-received.png)
+![](./images/ppk-2-fast-boot_preboot-espnow-esp32-not-received-closeup.png)
+
+
+### Send status over wifi from _boot.py
+(commit
+[44a1341](https://github.com/glenn20/micropython/commit/44a1341147513e7fbe0ccd9c2025869c09d27845))
+
+`_preboot_wifi.py`:
+```python
+import machine
+
+def send_state(broker):
+    import network
+    import urequests
+
+    sta = network.WLAN(network.STA_IF)
+    sta.active(True)
+    sta.connect("ssid", "password")
+    while not sta.isconnected():
+        pass
+    try:
+        r = urequests.post("http://XXX.XXX.XXX.XXX:5000/status", data="hello")
+    except OSError:
+        pass
+    sta.disconnect()
+    sta.active(False)
+
+if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+    send_state()
+    machine.deepsleep(1000)
+```
+
+**ESP32S3**
+
+**ESP32**
+
+- Time to boot and return to deepsleep is 2928ms (341.3mC).
+- This showed considerable variability with many some tarnsmissions taking much
+  longer (up to 4.9s (490mC)).
+- You can see the power saving mode at work, where the wifi radio is turned off
+  in PS_MIN_MODEM.
+
+![](./images/ppk-2-fast-boot_preboot-wifi-esp32.png)
+
+**Connect to Wifi only:**
+
+- Time to connect to wifi and then deepsleep (ie. don't send message) is 1626ms (204.3mC).
+
+![](./images/ppk-2-fast-boot_preboot-wifi-esp32-connect-only.png)
+
+**Wifi connect - static IP:**
+
+- Time to boot and return to deepsleep is 1157ms (165.6mC).
+  - This may vary depending on your Access Point
+
+![](./images/ppk-2-fast-boot_preboot-wifi-esp32-connect-only-static-ip.png)
 
 
