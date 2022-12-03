@@ -21,8 +21,9 @@ These measurements use the optimised (fast boot) process described in [Optimisin
 | Send ESPNow Failed | 145 | 15.4 | 21.4 |
 | Connect to wifi (DHCP) and send HTTP Post | 2928 | 341.3 | 474.0 |
 | Connect to wifi (DHCP) | 1626 | 204.3 | 283.8 |
-| Connect to wifi (Static IP) | 1157 | 165.6 | 230.0 |
-
+| Connect to wifi (Static IP) | 734 | 100.2 | 139.2 |
+| Connect to wifi (Static IP) and send MQTT message | 774 | 108.6 | 150.9 |
+774ms (108.6mC)
 ## Send status via ESNow from _boot.py (commit [fc62686](https://github.com/micropython/micropython/commit/fc62686524245f9f1b492eb0c978e00375e44d90))
 
 **NOTES:**
@@ -61,7 +62,7 @@ if machine.reset_cause() == machine.DEEPSLEEP_RESET:
 |---|---|
 **ESP32 Boot, Send ESPNow message:** Time to boot and return to deepsleep is 118.8ms (7.68mC). Sending the message generates a current spike of ~550mA over 0.6ms (1 byte) to 2.5ms (255 bytes). | ![_](./images/ppk-2-fast-boot_preboot-espnow-esp32.png)
 If the peer is not found, the transmission is retried and more energy is consumed: 144.9ms (15.43mC) (twice the energy consumption). Note: Retransmission does **NOT** occur if sending to the broadcast address. |![_](./images/ppk-2-fast-boot_preboot-espnow-esp32-not-received.png)
-_| ![_](./images/ppk-2-fast-boot_preboot-espnow-esp32-not-received-closeup.png)
+Zoom in on retransmit attempts | ![_](./images/ppk-2-fast-boot_preboot-espnow-esp32-not-received-closeup.png)
 
 ## Send status over wifi from _boot.py (commit [44a1341](https://github.com/glenn20/micropython/commit/44a1341147513e7fbe0ccd9c2025869c09d27845))
 
