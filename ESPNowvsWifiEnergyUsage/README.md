@@ -106,3 +106,36 @@ NOTES:
 **ESP32 Boot, connect to Wifi and DHCP:** Time to connect to wifi and then deepsleep (ie. don't send message) is 1626ms (204.3mC). | ![_](./images/ppk-2-fast-boot_preboot-wifi-esp32-connect-only.png)
 **ESP32 Wifi connect - static IP:** Time to boot and return to deepsleep is 734.3ms (100.2mC) | ![_](./images/ppk-2-fast-boot_preboot-wifi-esp32-connect-only-static-ip.png)
 **ESP32 Wifi connect - MQTT - Static IP:** Time to boot and post MQTT message is 774ms (108.6mC) | ![_](./images/ppk-2-fast-boot_preboot-wifi-mqtt-static-ip.png)
+
+`_preboot_mqtt.py`:
+
+```python
+import machine
+
+def send_state(broker):
+    import network
+    import urequests
+    from umqtt.simple import MQTTClient, MQTTException
+
+    sta = network.WLAN(network.STA_IF)
+    sta.active(True)
+    sta.connect("ssid", "password")
+    while not sta.isconnected():
+        pass
+    try:
+        mq = MQTTClient(
+            "esp32_test", "192.168.10.10",
+            user="mqtt_user", password="mqtt_password")
+        mq.connect()
+        mq.publish("glenn_test/test", "Sensor")
+        mq.disconnect()
+    except MQTTException as err:
+        print(err)
+    sta.disconnect()
+    sta.active(False)
+
+if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+    send_state()
+    machine.deepsleep(1000)
+```
+
