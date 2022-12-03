@@ -100,8 +100,7 @@ Time to go back to sleep from main.py: 635ms. Power consumption: 41.3mC | ![_](.
 Time to start of micropython `app_main()`: 264ms (15.9mC) |![_](./images/ppk-20221117T050247.png)
 From `app.main()` to end of boardctl_startup() (nvs_flash_init()): 7.8ms (0.57mC) | ![A](./images/ppk-2-nvs_flash_init_time.png)
 Time to execute gc_init() (with 16MB SPIRAM): 12.5ms (0.71mC) | ![_](./images/ppk2-gc_init-time.png)
-Time from call to load `_boot.py` to execution of deepsleep() in `main.py`:
-350ms (23.6mC) | ![A](./images/ppk-2-boot-to-main-py.png)
+Time from call to load `_boot.py` to execution of deepsleep() in `main.py`: 350ms (23.6mC) | ![A](./images/ppk-2-boot-to-main-py.png)
 
 # Optimisation opportunities
 

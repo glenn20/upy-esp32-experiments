@@ -14,7 +14,7 @@ These measurements use the optimised (fast boot) process described in [Optimisin
 
 **_(Energy (uWh) = 1000 * Charge (mC) * 5V / (60 * 60))_**
 
-| Component | Time (ms) | Charge (mC) | Energy (microWh) |
+| Test | Time (ms) | Charge (mC) | Energy (microWh) |
 |---|---:|---:|---:|
 | Fast Boot to `_boot.py` only | 70 |  3.32 | 4.6 |
 | Send ESPNow Succeed | 119 | 7.68 | 10.7 |
@@ -25,8 +25,13 @@ These measurements use the optimised (fast boot) process described in [Optimisin
 
 ## Send status via ESNow from _boot.py (commit [fc62686](https://github.com/micropython/micropython/commit/fc62686524245f9f1b492eb0c978e00375e44d90))
 
-**NOTE:** This commit has `nvs_flash_init()` enabled at boot time as this is
-required for `esp_wifi_init()` (additional 7ms of bootup time).
+**NOTES:**
+
+- This commit has `nvs_flash_init()` enabled at boot time as this is required
+for `esp_wifi_init()` (additional 7ms of bootup time).
+- This app is run as a module frozen into the Micropython image
+  - Add ~350ms (23.6mC, 32.8uWh) to mount filesystem from flash storage and
+    execute app.
 
 `_preboot.py`:
 ```python
