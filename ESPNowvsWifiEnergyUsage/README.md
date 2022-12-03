@@ -103,4 +103,5 @@ NOTES:
 |---|---|
 **ESP32 Boot, connect to wifi and DHCP, POST message:** Time to boot and return to deepsleep is 2928ms (341.3mC) . | ![_](./images/ppk-2-fast-boot_preboot-wifi-esp32.png)
 **ESP32 Boot, connect to Wifi and DHCP:** Time to connect to wifi and then deepsleep (ie. don't send message) is 1626ms (204.3mC). | ![_](./images/ppk-2-fast-boot_preboot-wifi-esp32-connect-only.png)
-**ESP32 Wifi connect - static IP:** Time to boot and return to deepsleep is 1157ms (165.6mC) | ![_](./images/ppk-2-fast-boot_preboot-wifi-esp32-connect-only-static-ip.png)
+**ESP32 Wifi connect - static IP:** Time to boot and return to deepsleep is 734.3ms (100.2mC) | ![_](./images/ppk-2-fast-boot_preboot-wifi-esp32-connect-only-static-ip.png)
+**ESP32 Wifi connect - MQTT - Static IP:** Time to boot and post MQTT message is 774ms (108.6mC) | ![_](./images/ppk-2-fast-boot_preboot-wifi-mqtt-static-ip.png)
