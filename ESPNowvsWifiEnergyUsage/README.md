@@ -16,9 +16,9 @@ These measurements use the optimised (fast boot) process described in [Optimisin
 
 | Component | Time (ms) | Charge (mC) | Energy (microWh) |
 |---|---:|---:|---:|
-| Fast Boot to `_boot.py` only | 70.0 |  3.32 | 4.6 |
-| Send ESPNow Succeed | 118.8ms | 7.68 | 10.7 |
-| Send ESPNow Failed | 144.9 | 15.4 | 21.4 |
+| Fast Boot to `_boot.py` only | 70 |  3.32 | 4.6 |
+| Send ESPNow Succeed | 119 | 7.68 | 10.7 |
+| Send ESPNow Failed | 145 | 15.4 | 21.4 |
 | Connect to wifi (DHCP) and send HTTP Post | 2928 | 341.3 | 474.0 |
 | Connect to wifi (DHCP) | 1626 | 204.3 | 283.8 |
 | Connect to wifi (Static IP) | 1157 | 165.6 | 230.0 |
@@ -88,8 +88,8 @@ if machine.reset_cause() == machine.DEEPSLEEP_RESET:
 
 NOTES:
 
-- Boot times showed considerable considerable variability with some
-  transmissions taking up to 4.9s (490mC).
+- Boot times showed considerable variability with some transmissions taking up
+  to 4.9s (490mC).
 - Wifi connection and dhcp response times may vary by Access Point.
 - You can see the [WIFI_PS_MIN_MODEM power saving mode](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv4N14wifi_ps_type_t17WIFI_PS_MIN_MODEME) at work, where the wifi radio
   is turned off periodically while connected to the Access Point.

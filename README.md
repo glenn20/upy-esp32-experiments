@@ -1,4 +1,4 @@
-# My Experiments and Measurments with Micropython on ESP32* devices
+# My Experiments and Measurements with Micropython on ESP32* devices
 
 Here are some of my experiments and measurements on running micropython on
 ESP32* devices, including:
@@ -19,3 +19,7 @@ NOTE: I was a bit time constrained during these initial measurements, so they
 are not as systematic, consistent or clearly presented as I would prefer, but
 there are still some useful conclusions to be drawn, so I thought I'd share this
 early work.
+
+One big caveat is that most of these initial measurements are made by monitoring
+the power consumption on the USB power line which will over-estimate power
+consumed when the devices are powered by battery.
