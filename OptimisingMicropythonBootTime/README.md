@@ -36,7 +36,7 @@ For ESP32 device:
 - the optimised boot process takes **70ms (3.32mC)** compared to 48.8ms (2.5mC) for
 the ESP32-S3
 
-See [ESP32 Wake Stubs](./ESP32WakeStubs.md) for an additional power optimisation
+See [ESP32 Wake Stubs](../ESP32WakeStubs/README.md) for an additional power optimisation
 method.
 
 ## Software

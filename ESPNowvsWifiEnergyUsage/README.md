@@ -8,8 +8,7 @@ We will compare the boot time and energy consumption of ESP32 devices to:
   - Send a status message via ESPNow or Wifi,
   - Return to deepsleep.
 
-These measurements use the optimised (fast boot) process described in [Optimising
-Micropython Boot Time](./OptimisingMicropythonBootTime.md).
+These measurements use the optimised (fast boot) process described in [Optimising Micropython Boot Time](../OptimisingMicropythonBootTime/README.md).
 
 ## Summary of Results
 
