@@ -1,5 +1,8 @@
 # Using ESP32 Wake stubs
 
+(commit [8e30d80](https://github.com/glenn20/micropython/commit/8e30d80afcd56af38260127fef5c3080b71e8555)
+  Add wake stub code to modesp32.c)
+
 (See [Espressif
 Docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/deep-sleep-stub.html)
 and examples at <https://gist.github.com/igrr/54f7fbe0513ac14e1aea3fd7fbecfeab>)

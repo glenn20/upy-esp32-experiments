@@ -10,6 +10,9 @@ We will compare the boot time and energy consumption of ESP32 devices to:
 
 These measurements use the optimised (fast boot) process described in [Optimising Micropython Boot Time](../OptimisingMicropythonBootTime/README.md).
 
+Commit: [c34ca002](https://github.com/glenn20/micropython/commit/c34ca0023b5c25e9797d7a41302bb77bc33836a5)
+  Add frozen modules to send status over espnow/wifi/mqtt.
+
 ## Summary of Results
 
 **_(Energy (uWh) = 1000 * Charge (mC) * 5V / (60 * 60))_**
@@ -138,4 +141,3 @@ if machine.reset_cause() == machine.DEEPSLEEP_RESET:
     send_state()
     machine.deepsleep(1000)
 ```
-
