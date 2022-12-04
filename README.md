@@ -30,11 +30,11 @@ Measuring time to wake ESP32-S3 and ESP32 devices from deepsleep, boot micropyth
 
 | Wake from deepsleep, boot and return to deepsleep | Time (ms) | Charge (mC) | Energy (microWh) |
 |---|---:|---:|---:|
-| Unoptimised (boot to main.py) | 635.1 | 41.92 | 58.3 |
-| Optimised (boot to frozen _boot.py) | 48.8 | 1.82 | 2.5 |
-| Optimised boot and send ESPNow Mesage | 119 | 7.68 | 10.7 |
-| Optmised boot and send MQTT message (static IP) | 774 | 108.6 | 150.9 |
-| Optmised boot and send MQTT message (DHCP) | 1626 | 204.3 | 283.8 |
+| Unoptimised (boot to main.py) | 635.1 | 41.9 | 58.3 |
+| Optimised (boot to frozen _boot.py) | 48.8 | 1.8 | 2.5 |
+| Optimised boot and send ESPNow Mesage | 119.0 | 7.7 | 10.7 |
+| Optmised boot and send MQTT message (static IP) | 774.3 | 108.6 | 150.9 |
+| Optmised boot and send MQTT message (DHCP) | 1626.0 | 204.3 | 283.8 |
 | ESP32 Wake Stub |  2.8 |  0.044 | 0.06 |
 
 <img
