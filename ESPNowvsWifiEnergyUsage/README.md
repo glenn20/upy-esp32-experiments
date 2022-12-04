@@ -26,7 +26,7 @@ Commit: [c34ca002](https://github.com/glenn20/micropython/commit/c34ca0023b5c25e
 | Connect to wifi (DHCP) | 1626 | 204.3 | 283.8 |
 | Connect to wifi (Static IP) | 734 | 100.2 | 139.2 |
 | Connect to wifi (Static IP) and send MQTT message | 774 | 108.6 | 150.9 |
-774ms (108.6mC)
+
 ## Send status via ESNow from _boot.py (commit [fc62686](https://github.com/micropython/micropython/commit/fc62686524245f9f1b492eb0c978e00375e44d90))
 
 **NOTES:**

@@ -23,3 +23,20 @@ early work.
 One big caveat is that most of these initial measurements are made by monitoring
 the power consumption on the USB power line which will over-estimate power
 consumed when the devices are powered by battery.
+
+## Highlights
+
+Measuring time to wake ESP32-S3 and ESP32 devices from deepsleep, boot micropython and return to deepsleep:
+
+| Wake from deepsleep, boot and return to deepsleep | Time (ms) | Charge (mC) | Energy (microWh) |
+|---|---:|---:|---:|
+| Unoptimised (boot to main.py) | 635.1 | 41.92 | 58.3 |
+| Optimised (boot to frozen _boot.py) | 48.8 | 1.82 | 2.5 |
+| Optimised boot and send ESPNow Mesage | 119 | 7.68 | 10.7 |
+| Optmised boot and send MQTT message (static IP) | 774 | 108.6 | 150.9 |
+| Optmised boot and send MQTT message (DHCP) | 1626 | 204.3 | 283.8 |
+| ESP32 Wake Stub |  2.8 |  0.044 | 0.06 |
+
+<img
+src="./ESPNowvsWifiEnergyUsage/images/ppk-2-fast-boot_preboot-wifi-esp32.png"
+alt="drawing" width="500"/>
