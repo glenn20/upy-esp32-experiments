@@ -11,6 +11,9 @@ ESP32* devices, including:
 - [ESPNow vs Wifi Energy Consumption](./ESPNowvsWifiEnergyUsage/README.md):
   Measuring the energy consumed to boot Micropython from deepsleep and send a
   status message to a peer via ESPNow and Wifi.
+- [ESPNow Power Management Tests](./ESPNowPowerManagement/README.md): Tests and
+  measurements of the new ESPNOW power management features available in ESP IDF
+  v5.0.2.
 
 Comments, suggestions, criticisms and requests are welcome via the Issues or
 Discussions tabs above.
