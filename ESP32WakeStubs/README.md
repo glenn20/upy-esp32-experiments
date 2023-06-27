@@ -21,6 +21,6 @@ the SoC can go back to sleep or continue to start ESP-IDF normally.
 
 |   |   |
 |---|---|
-**ESP32:** Returns to sleep after 2.8ms (~0.044mC - )! | ![_](./images/ppk-2-ESP32-wake-stub.png)
+**ESP32:** Returns to sleep after 2.8ms (~0.044mC)! | ![_](./images/ppk-2-ESP32-wake-stub.png)
 **ESP32-S3:** Returns to deepsleep after 8.7ms (0.18mC) (4x longer than ESP32) (vs 50.2ms/2.0mC). | ![_](./images/ppk-2-esp32s3-wake-stub.png)
 **ESP32-S3:** Compared with fast boot from deep sleep  of 50ms (2.0mC)). |  ![_](./images/ppk-2-esp32s3-wake-stub-fast-boot.png)

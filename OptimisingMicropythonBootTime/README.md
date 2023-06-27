@@ -16,13 +16,13 @@ micropython and return to deepsleep:
 
 | Before Optimisation | Time (ms) | Charge (mC) | Energy (microWh) |
 |---|---:|---:|---:|
-| Boot to `app_main()` without Validation | 47.0 |  1.7 | 2.4 |
-| Validation of Image     | 217  | 14.2 | 19.7 |
-| `nvs_flash_init()`      | 7.8  |  0.57 | 0.8 |
-| Allocate SPIRAM to GC   | 12.5 |  0.71 | 1.0 |
-| Micropython `app_main()` to `_boot.py` | 0.8 | 0.06 | 0.8 |
-| `_boot.py` to `main.py` and deepsleep | 350 | 23.6 | 32.8 |
-|**Total:** | **635.1** | **41.92** | **58.3** |
+| Boot to `app_main()` without Validation |  47.0 |  1.7  |  2.4 |
+| Validation of Image                     | 217.0 | 14.2  | 19.7 |
+| `nvs_flash_init()`                      |   7.8 |  0.6 |  0.8 |
+| Allocate SPIRAM to GC                   |  12.5 |  0.7 |  1.0 |
+| Micropython `app_main()` to `_boot.py`  |   0.8 |  0.1 |  0.8 |
+| `_boot.py` to `main.py` and deepsleep   | 350.0 | 23.6  | 32.8 |
+|**Total:**                               | **635.1** | **41.9** | **58.3** |
 
 | After Optimisation | Time (ms) | Charge (mC) | Energy (microWh) |
 |---|---:|---:|---:|
