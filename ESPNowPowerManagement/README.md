@@ -12,10 +12,10 @@ v5.0.2.
 | ESPNOW pm setting | Duty Cycle | Current (mA)  | Power (mW)  | % of max |
 |---|---:|---:|---:|---:|
  OFF            | 100% | 100 | 330 | 100% |
- `pm=(75, 200)` |  38% | 56 | 185 | 56% |
- `pm=(75, 300)` |  25% | 47 | 155 | 47% |
- `pm=(50, 500)` |  10% | 36 | 119 | 36% |
- `pm=(10, 500)` |   2% | 31 | 102 | 31% |
+ `pm=(75, 200)` |  38% |  56 | 185 |  56% |
+ `pm=(75, 300)` |  25% |  47 | 155 |  47% |
+ `pm=(50, 500)` |  10% |  36 | 119 |  36% |
+ `pm=(10, 500)` |   2% |  31 | 102 |  31% |
 
 **Radio OFF:** Current = 28.9mA (95mW)
 **Radio ON:** Current = 100mA (330mW)
@@ -25,13 +25,26 @@ v5.0.2.
 | ESPNOW pm setting | Duty Cycle | Current (mA)  | Power (mW)  | % of max |
 |---|---:|---:|---:|---:|
  OFF            | 100% | 103 | 340 | 100% |
- `pm=(75, 200)` |  38% | 67 | 221 | 65% |
- `pm=(75, 300)` |  25% | 57 | 188 | 55% |
- `pm=(50, 500)` |  10% | 50 | 165 | 49% |
- `pm=(10, 500)` |   2% | 45 | 149 | 44% |
+ `pm=(75, 200)` |  38% |  67 | 221 |  65% |
+ `pm=(75, 300)` |  25% |  57 | 188 |  55% |
+ `pm=(50, 500)` |  10% |  50 | 165 |  49% |
+ `pm=(10, 500)` |   2% |  45 | 149 |  44% |
 
 **Radio OFF:** Current = 43.8mA (145mW)
 **Radio ON:** Current = 104mA (343mW)
+
+### ESP32S2: (FeatherS2)
+
+| ESPNOW pm setting | Duty Cycle | Current (mA)  | Power (mW)  | % of max |
+|---|---:|---:|---:|---:|
+ OFF            | 100% | 73 | 241 | 100% |
+ `pm=(75, 200)` |  38% | 41 | 135 |  56% |
+ `pm=(75, 300)` |  25% | 35 | 116 |  48% |
+ `pm=(50, 500)` |  10% | 27 |  89 |  37% |
+ `pm=(10, 500)` |   2% | 23 |  76 |  32% |
+
+**Radio OFF:** Current = 22.2mA (73mW)
+**Radio ON:** Current = 73.0mA (241mW)
 
 ## Software
 
@@ -61,7 +74,7 @@ which includes support for setting the ESPNOW wireless power saving parameters.
 
 - DFRobot Beetle ESP32 module
 - FeatherS3 device from UnexpectedMaker [feathers3.io](https://feathers3.io)
-  - Selected for low power consumption and support for my sensors.
+- FeatherS2 device from UnexpectedMaker [feathers2.io](https://feathers2.io)
 - [Power Profiler Kit
   II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2)
   to measure power consumption of device during experiments.
@@ -69,7 +82,8 @@ which includes support for setting the ESPNOW wireless power saving parameters.
 - Cables, computer.
 
 These measurements are made with the PPK2 operating in PSU mode to power the
-ESP32 devices.
+ESP32 devices via the GND and 3.3V pins (some other components will also be
+powered).
 
 ## Measurements
 
