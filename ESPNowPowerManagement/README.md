@@ -5,6 +5,27 @@
 To check and test the new connectionless power management features in ESP IDF
 v5.0.2.
 
+- Usage: `e.config(pm=(window, interval))`:
+
+  - every `interval` milliseconds the radio will be turned on for `window`
+    milliseconds to listen for incoming messages (`interval` should be a
+    multiple of 100ms). Incoming messages will be lost while the radio is off.
+    Example:
+
+  ```py
+  e.config(pm=(75, 200))  # equivalent to WLAN.config(pm=WLAN.PM_PERFORMANCE)
+  e.config(pm=(75, 300))  # equivalent to WLAN.config(pm=WLAN.PM_POWERSAVE)
+  ```
+
+  See [Config ESP-NOW Power-saving Parameter](
+  https://docs.espressif.com/projects/esp-idf/en/v5.0.2/esp32/api-reference/network/esp_now.html#config-esp-now-power-saving-parameter)
+
+Based on my micropython
+[`espnow-50-pm`](https://github.com/glenn20/micropython/tree/espnow-50-pm)
+branch:
+
+- Pull Request at https://github.com/micropython/micropython/pull/11890.
+
 ## Summary of Results (see below for full data)
 
 ### ESP32: (DFRobot Beetle ESP32 module)
@@ -52,23 +73,9 @@ These measurements are based on my micropython `espnow-50-pm` branch at:
 
 - <https://github.com/glenn20/micropython/tree/espnow-50-pm>
   - based on micropython master branch revision: [v1.20.0-246-gc2ea8b2f9]
+  - Pull Request at https://github.com/micropython/micropython/pull/11890.
 
 which includes support for setting the ESPNOW wireless power saving parameters.
-
-- Usage: `e.config(pm=(window, interval))`:
-
-  - every `interval` milliseconds the radio will be turned on for `window`
-    milliseconds to listen for incoming messages (`interval` should be a
-    multiple of 100ms). Incoming messages will be lost while the radio is off.
-    Example:
-
-  ```py
-  e.config(pm=(75, 200))  # equivalent to WLAN.config(pm=WLAN.PM_PERFORMANCE)
-  e.config(pm=(75, 300))  # equivalent to WLAN.config(pm=WLAN.PM_POWERSAVE)
-  ```
-
-  See [Config ESP-NOW Power-saving Parameter](
-  https://docs.espressif.com/projects/esp-idf/en/v5.0.2/esp32/api-reference/network/esp_now.html#config-esp-now-power-saving-parameter)
 
 ## Hardware
 
@@ -127,5 +134,3 @@ while True:
  `pm=(75, 300)` | 57 | ![_](./images/ppk-esp32s3-pm-75-300.png)
  `pm=(50, 500)` | 50 | ![_](./images/ppk-esp32s3-pm-50-500.png)
  `pm=(10, 500)` | 45 | ![_](./images/ppk-esp32s3-pm-10-500.png)
-
-
