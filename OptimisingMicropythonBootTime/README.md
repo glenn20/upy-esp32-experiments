@@ -149,6 +149,12 @@ NOTE: For most battery operated devices it is unlikely that additional SPIRAM
 would be required or be desirable, but I include it here as my testing device
 was equipped with SPIRAM.
 
+**NOTE: micropython no longer calls `gc_init()` on all available memory at boot
+(including PSRAM) and this change should no longer be necessary for v1.21+. (See
+micropython commit
+[e465012](https://github.com/micropython/micropython/commit/e4650125b88a35f074097f16d84a8f49bd22ac06)
+and this [discussion](https://github.com/orgs/micropython/discussions/12316)).**
+
 |   |   |
 |---|---|
 `gc_init()` time reduced from 12.5ms (0.71mC) to less than 0.1ms. (200 microseconds is time to generate pulse on logic pin.) | ![_](./images/ppk-2-fast-boot-no-spiram.png)
